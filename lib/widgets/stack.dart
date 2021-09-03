@@ -6,19 +6,40 @@ main() {
   buildInDefaultContainer(
     Stack(
       children: [
+        Container(
+          color: Colors.green,
+          width: 300,
+          height: 300,
+        ),
         Positioned.fill(
+          top: 50,
           child: Container(
-            color: Colors.blue,
+            color: Colors.lightBlue,
           ),
         ),
         Positioned(
-          left: 100,
+          left: 50,
           width: 100,
-          bottom: 200,
-          top: 200,
+          bottom: 100,
+          top: 100,
           child: Container(
             color: Colors.red,
           ),
+        ),
+        Positioned.directional(
+          textDirection: TextDirection.rtl,
+          start: 10,
+          width: 50,
+          top: 140,
+          bottom: 140,
+          child: Container(
+            color: Colors.black38,
+          ),
+        ),
+        Container(
+          color: Colors.amber,
+          width: 100,
+          height: 100,
         ),
       ],
     ),
