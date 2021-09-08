@@ -5,7 +5,9 @@ class CustomRoute {
   final Map<String, dynamic> params;
   final RouteHandler handler;
 
-  CustomRoute({required this.url, required this.handler, Map<String, dynamic>? params}) : params = params?? {};
+  CustomRoute(
+      {required this.url, required this.handler, Map<String, dynamic>? params})
+      : params = params ?? {};
 }
 
 class CustomRouteBuilder {
@@ -29,5 +31,5 @@ class CustomRouteBuilder {
 }
 
 abstract class RouteHandler {
-  Page buildPage(Map<String, dynamic> params);
+  Page buildPage(Map<String, dynamic> routeParams, Map<String, String> queryParams);
 }

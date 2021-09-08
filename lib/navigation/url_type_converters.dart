@@ -3,6 +3,10 @@ abstract class UrlTypeConverter<T> {
     int: IntUrlConverter(),
   };
 
+  static void registerConverter(Type type, UrlTypeConverter converter) {
+    convertersMap.addAll({type: converter});
+  }
+
   static UrlTypeConverter getConverter(Type type) {
     return UrlTypeConverter.convertersMap[type]?? NoConverter();
   }

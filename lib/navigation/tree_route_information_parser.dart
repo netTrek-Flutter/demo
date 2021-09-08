@@ -10,8 +10,14 @@ class TreeRouteInformationParser extends RouteInformationParser<CustomRoute> {
   TreeRouteInformationParser(this.routesTreeRoot, this.error404);
 
   @override
-  Future<CustomRoute> parseRouteInformation(RouteInformation routeInformation) async {
-    return routesTreeRoot.findCustomRoute(Uri.parse(routeInformation.location?? ''))?? error404;
+  Future<CustomRoute> parseRouteInformation(
+      RouteInformation routeInformation) async {
+    return parseRouteInformationSync(routeInformation);
+  }
+  CustomRoute parseRouteInformationSync(RouteInformation routeInformation) {
+    return routesTreeRoot
+        .findCustomRoute(Uri.parse(routeInformation.location ?? '')) ??
+        error404;
   }
 
   @override
