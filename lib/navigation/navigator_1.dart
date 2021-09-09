@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_project/widgets/default_widget_container.dart';
+import 'package:flutter_demo_project/widgets/helper_functions.dart';
 
 main() {
   buildInDefaultContainer(
@@ -12,7 +12,9 @@ main() {
             context,
             MaterialPageRoute(
               builder: (context) => Scaffold(
-                appBar: AppBar(title: Text('Pushed route'),),
+                appBar: AppBar(
+                  title: Text('Pushed route'),
+                ),
                 body: Center(
                   child: IconButton(
                     icon: Icon(Icons.remove_circle),
