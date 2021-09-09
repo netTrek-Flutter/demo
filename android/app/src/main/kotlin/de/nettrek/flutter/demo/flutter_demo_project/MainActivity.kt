@@ -29,11 +29,15 @@ class MainActivity: FlutterActivity() {
         );
 
         //Pigeon
-        BatteryApi.setup(flutterEngine.dartExecutor.binaryMessenger, BatteryApi() {
-            override fun getBatteryLevel(): int {
-               return MyMethodCallHandler.getBatteryLevel();
-            }
-        })
+        Pigeon.BatteryApi.setup(flutterEngine.dartExecutor.binaryMessenger, BatteryApiImpl(context));
+    }
+}
+
+class BatteryApiImpl(context: Context) : Pigeon.BatteryApi {
+    private final val CONTEXT = context;
+
+    override fun getBatteryLevel(): Long {
+        return MyMethodCallHandler.getBatteryLevel(CONTEXT).toLong()
     }
 }
 
@@ -49,7 +53,7 @@ class MyMethodCallHandler(context: Context) : MethodChannel.MethodCallHandler {
     }
 
     private fun processBateryLevel(result: MethodChannel.Result) {
-        val batteryLevel = getBatteryLevel();
+        val batteryLevel = getBatteryLevel(CONTEXT);
 
         if (batteryLevel != -1) {
             result.success(batteryLevel);
@@ -59,15 +63,15 @@ class MyMethodCallHandler(context: Context) : MethodChannel.MethodCallHandler {
     }
 
     companion object {
-        fun getBatteryLevel(): Int {
+        fun getBatteryLevel(context: Context): Int {
             val batteryLevel: Int
             if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP)
             {
-                val batteryManager = CONTEXT.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+                val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
                 batteryLevel = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
             } else
             {
-                val intent = ContextWrapper(CONTEXT).registerReceiver(
+                val intent = ContextWrapper(context).registerReceiver(
                     null,
                     IntentFilter(Intent.ACTION_BATTERY_CHANGED)
                 )

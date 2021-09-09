@@ -8,6 +8,13 @@ class CustomRoute {
   CustomRoute(
       {required this.url, required this.handler, Map<String, dynamic>? params})
       : params = params ?? {};
+
+  Page buildRoute() {
+    return handler.buildPage(
+      params,
+      url.queryParameters,
+    );
+  }
 }
 
 class CustomRouteBuilder {
@@ -31,5 +38,6 @@ class CustomRouteBuilder {
 }
 
 abstract class RouteHandler {
-  Page buildPage(Map<String, dynamic> routeParams, Map<String, String> queryParams);
+  Page buildPage(
+      Map<String, dynamic> routeParams, Map<String, String> queryParams);
 }

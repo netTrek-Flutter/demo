@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_demo_project/platform_channels/pigeon.dart';
 import 'package:flutter_demo_project/widgets/helper_functions.dart';
 
 main() async {
-  MethodChannel platform =
-      MethodChannel('de.nettrek.flutter.demo.demo_flutter_project/battery');
-
-  Stream<int> batteryLevels = checkBatteryLevelPeriodic(platform);
+  Stream<int> batteryLevels = checkBatteryLevelPeriodic();
 
   buildInDefaultContainer(
     StreamBuilder<int>(
@@ -18,17 +15,9 @@ main() async {
   );
 }
 
-Stream<int> checkBatteryLevelPeriodic(MethodChannel methodChannel) async* {
+Stream<int> checkBatteryLevelPeriodic() async* {
   while(true) {
-    yield await getBatteryLevel(methodChannel);
+    yield await BatteryApi().getBatteryLevel();
     await Future.delayed(Duration(seconds: 2));
-  }
-}
-
-Future<int> getBatteryLevel(MethodChannel methodChannel) async {
-  try {
-    return await methodChannel.invokeMethod('getBatteryLevel');
-  } on PlatformException catch (_) {
-    return -1;
   }
 }
