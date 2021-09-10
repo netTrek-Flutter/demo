@@ -6,7 +6,9 @@ final ThemeData unserTheme = ThemeData(
   backgroundColor: Colors.white,
   fontFamily: 'Monospace',
   primaryColor: Colors.green,
-  accentColor: Colors.deepOrangeAccent,
+  colorScheme: ColorScheme.light(
+    secondary: Colors.deepOrangeAccent
+  ),
   textTheme: TextTheme(
     bodyText2: TextStyle(
       fontSize: 14,
@@ -63,7 +65,7 @@ class ThemeDemonstrationView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            color: theme.accentColor,
+            color: theme.colorScheme.secondary,
             height: 100,
             child: Center(
               child: Text(

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +9,7 @@ class MyRouterDelegate extends RouterDelegate<CustomRoute>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<CustomRoute> {
   static late final MyRouterDelegate _instance;
 
-    static void navigateToUrl(BuildContext context, String url) {
+  static void navigateToUrl(BuildContext context, String url) {
     _instance._navigateToUrl(context, url);
   }
 
@@ -41,8 +39,8 @@ class MyRouterDelegate extends RouterDelegate<CustomRoute>
       key: navigatorKey,
       pages: _pages.reversed.toList(),
       onPopPage: (route, result) {
-        log('opp');
-        return !route.didPop(result) && _pages.length <= 1;
+        print('No!');
+        return false;
       },
     );
   }
@@ -55,7 +53,8 @@ class MyRouterDelegate extends RouterDelegate<CustomRoute>
   void _navigateToUrl(BuildContext context, String url) {
     Router.navigate(context, () {
       SystemNavigator.routeInformationUpdated(location: url);
-      setNewRoutePath(routeInformationParser.parseRouteInformationSync(RouteInformation(location: url)));
+      setNewRoutePath(routeInformationParser
+          .parseRouteInformationSync(RouteInformation(location: url)));
     });
     notifyListeners();
   }

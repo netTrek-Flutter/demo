@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'custom_route.dart';
-import 'my_back_button_dispatcher.dart';
 import 'tree_route_information_parser.dart';
 import 'url_tree_node.dart';
 import 'url_tree_node_with_parameter.dart';
@@ -43,7 +42,6 @@ main() {
           handler: LoadingRouteHandler(),
         ),
       ),
-      backButtonDispatcher: MyBackButtonDispatcher(),
     ),
   );
 }
