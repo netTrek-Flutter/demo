@@ -15,9 +15,9 @@ abstract class WhoAmI {
   void whoami();
 }
 
-class MyMixin implements WhoAmI {
+mixin MyMixin on Child implements WhoAmI {
   void whoami() {
-    print("I'm MyMixin");
+    print("I'm MyMixin, $myMessage");
   }
 }
 
