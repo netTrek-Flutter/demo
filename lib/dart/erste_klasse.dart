@@ -28,17 +28,27 @@ class ErsteKlasse {
 }
 
 class ZweiteKlasse extends ErsteKlasse {
+  late String db;
   ZweiteKlasse(String test, [String t2 = 'default t2'])
-      : super(test, t2, test3: 'test3 von zweiter Klasse', toPrint: 'Hi von zweiter Klasse');
+      : super(test, t2,
+            test3: 'test3 von zweiter Klasse',
+            toPrint: 'Hi von zweiter Klasse') {
+    db = '    _____\n'
+        ' ___ |[]|_n__n_I_c\n'
+        '|___||__|###|____}\n'
+        ' O-O--O-O+++--O-O';
+  }
 
   @override
   void methode() {
     print(_test2);
+    print(db);
   }
 }
 
 main() {
-  ErsteKlasse k1 = ErsteKlasse('test von k1', 'test2 von k1', test3: 'test3 von k1');
+  ErsteKlasse k1 =
+      ErsteKlasse('test von k1', 'test2 von k1', test3: 'test3 von k1');
   ErsteKlasse k2 = ZweiteKlasse('test von k2');
   ZweiteKlasse k3 = ErsteKlasse.createSecond() as ZweiteKlasse;
 
